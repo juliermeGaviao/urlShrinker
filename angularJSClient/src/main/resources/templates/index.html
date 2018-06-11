@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html ng-app="urlShrinkerApp">
+<head>
+	<title>URL Shrinker AngularJS Client</title>
+	<script src="js/lib/angular.min.js"></script>
+	<script src="js/lib/angular-animate.min.js"></script>
+	<script src="js/lib/angular-aria.min.js"></script>
+	<script src="js/lib/angular-messages.min.js"></script>
+	<script src="js/app/index.js"></script>
+
+	<link rel="stylesheet" href="css/app/app.css"/>
+	<link rel="stylesheet" href="css/lib/angular-material.min.css"/>
+</head>
+<body ng-controller="urlShrinkerCtrl">
+	<table style="width:100%">
+		<tbody>
+			<tr>
+				<td colspan="2" style="text-align:center;"><button ng-click="getGlobalStats()">Get Global Statistics</button></td>
+			</tr>
+			<tr>
+				<td style="width:50%">
+					<table style="width:100%">
+						<tr>
+							<td>User Id: <input ng-model="statsIdUser"/><button ng-click="getUserStats()">Get User Statistics</button></td>
+						</tr>
+						<tr>
+							<td>User Name: <input ng-model="username"/><button ng-click="addUser()">Add User</button></td>
+						</tr>
+						<tr>
+							<td>User Id: <input ng-model="deleteIdUser"/><button ng-click="deleteUser()">Delete User</button></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table style="width:100%">
+						<tr>
+							<td>URL Id: <input ng-model="statsIdUrl"/><button ng-click="getUrlStats()">Get URL Statistics</button></td>
+						</tr>
+						<tr>
+							<td>User Id: <input ng-model="idUserHyperlink"/>&nbsp;Hperlink: <input ng-model="hyperlink"/><button ng-click="addUrl()">Add URL</button></td>
+						</tr>
+						<tr>
+							<td>URL Id: <input ng-model="deleteIdUrl"/><button ng-click="deleteUrl()">Delete URL</button></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+		</tbody>
+	</table>
+	<table class="tableStats" ng-if="globalStatsVisible">
+		<tbody>
+			<tr>
+				<td style="width:50%" class="cellBorder">Hits: {{statsBean.hits}}</td>
+				<td class="cellBorder">URL Count: {{statsBean.urlCount}}</td>
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+		</tbody>
+	</table>
+	<table class="tableStats" ng-if="urlStatsVisible">
+		<thead>
+			<tr>
+				<th colspan="4" class="cellBorder">URLs</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th class="cellBorder">Id</th>
+				<th class="cellBorder">Hits</th>
+				<th class="cellBorder">URL</th>
+				<th class="cellBorder">Short URL</th>
+			</tr>
+			<tr ng-repeat="url in urlStatsBean">
+				<td class="cellBorder" style="text-align:center">{{url.id}}</td>
+				<td class="cellBorder" style="text-align:center">{{url.hits}}</td>
+				<td class="cellBorder">{{url.url}}</td>
+				<td class="cellBorder">{{url.shortUrl}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<table class="tableStats" ng-if="userRecordVisible">
+		<tbody>
+			<tr>
+				<td style="width:50%" class="cellBorder">Id: {{userBean.id}}</td>
+				<td class="cellBorder">User name: {{userBean.userName}}</td>
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

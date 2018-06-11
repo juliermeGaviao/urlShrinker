@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>URL Shrinker JSF Client</title>
+	</h:head>
+
+	<h:body>
+		<h:form prependId="false"><p:growl id="warningMessages" for="warningKeyMessage" showDetail="false"/></h:form>
+		<p:panelGrid style="width:100%" columns="1" styleClass="ui-noborder">
+			<p:panelGrid columns="1" style="text-align:center;width:100%">
+				<h:form><p:commandButton value="Get Global Statistics" action="#{indexController.getGlobalStats()}" update="resultTable,userGrid,urlGrid"/></h:form>
+			</p:panelGrid>
+			<p:panelGrid columns="2" style="width:100%">
+				<p:panelGrid id="userGrid" columns="1">
+					<h:form>
+						<p:outputLabel value="User Id:"/><p:spacer width="10"/>
+						<p:inputText value="#{indexController.inputText}" style="width:40px"/><p:spacer width="10"/>
+						<p:commandButton value="Get User Statistics" action="#{indexController.getUserStats()}" update="resultTable,userGrid,urlGrid,warningMessages"/>
+					</h:form>
+					<h:form>
+						<p:outputLabel value="User name:"/><p:spacer width="10"/>
+						<p:inputText value="#{indexController.inputText}"/><p:spacer width="10"/>
+						<p:commandButton value="Add User" action="#{indexController.addUser()}" update="resultTable,userGrid,urlGrid,warningMessages"/>
+					</h:form>
+					<h:form>
+						<p:outputLabel value="User Id:"/><p:spacer width="10"/>
+						<p:inputText value="#{indexController.inputText}" style="width:40px"/><p:spacer width="10"/>
+						<p:commandButton value="Delete User" action="#{indexController.deleteUser()}" update="resultTable,userGrid,urlGrid,warningMessages"/>
+					</h:form>
+				</p:panelGrid>
+				<p:panelGrid id="urlGrid" columns="1">
+					<h:form>
+						<p:outputLabel value="URL Id:"/><p:spacer width="10"/>
+						<p:inputText value="#{indexController.inputText}" style="width:40px"/><p:spacer width="10"/>
+						<p:commandButton value="Get URL Statistics" action="#{indexController.getUrlStats()}" update="resultTable,userGrid,urlGrid,warningMessages"/>
+					</h:form>
+					<h:form>
+						<p:outputLabel value="User Id:"/><p:spacer width="10"/>
+						<p:inputText value="#{indexController.inputText}" style="width:40px"/><p:spacer width="20"/>
+						<p:outputLabel value="Hyperlink:"/><p:spacer width="10"/>
+						<p:inputText value="#{indexController.inputText2}"/><p:spacer width="20"/>
+						<p:commandButton value="Add URL" action="#{indexController.addUrl()}" update="resultTable,userGrid,urlGrid,warningMessages"/>
+					</h:form>
+					<h:form>
+						<p:outputLabel value="URL Id:"/><p:spacer width="10"/>
+						<p:inputText value="#{indexController.inputText}" style="width:40px"/><p:spacer width="10"/>
+						<p:commandButton value="Delete URL" action="#{indexController.deleteUrl()}" update="resultTable,userGrid,urlGrid,warningMessages"/>
+					</h:form>
+				</p:panelGrid>
+			</p:panelGrid>
+		</p:panelGrid>
+		<p:spacer height="10"/>
+		<p:panelGrid id="resultTable" columns="1" style="width:100%">
+			<p:panelGrid columns="1" rendered="#{indexController.statsBean ne null}">
+				<p:outputLabel value="Hits: #{indexController.statsBean.hits}"/>
+				<p:outputLabel value="URL Count: #{indexController.statsBean.urlCount}"/>
+				<p:dataTable var="url" value="#{indexController.statsBean.topUrls}">
+					<f:facet name="header">URLs</f:facet>
+					<p:column headerText="Id" style="width:5%"><h:outputText value="#{url.id}"/></p:column>
+					<p:column headerText="Hits" style="width:5%"><h:outputText value="#{url.hits}"/></p:column>
+					<p:column headerText="URL"><h:outputText value="#{url.url}"/></p:column>
+					<p:column headerText="Short URL"><h:outputText value="#{url.shortUrl}"/></p:column>
+				</p:dataTable>
+			</p:panelGrid>
+			<p:dataTable var="url" value="#{indexController.urlBeans}" rendered="#{indexController.urlBeans ne null}">
+				<f:facet name="header">URLs</f:facet>
+				<p:column headerText="Id" style="width:5%"><h:outputText value="#{url.id}"/></p:column>
+				<p:column headerText="Hits" style="width:5%"><h:outputText value="#{url.hits}"/></p:column>
+				<p:column headerText="URL"><h:outputText value="#{url.url}"/></p:column>
+				<p:column headerText="Short URL"><h:outputText value="#{url.shortUrl}"/></p:column>
+			</p:dataTable>
+			<p:panelGrid columns="2" rendered="#{indexController.userBean ne null}" style="width:100%">
+				<p:outputLabel value="Id: #{indexController.userBean.id}"/>
+				<p:outputLabel value="User name: #{indexController.userBean.userName}"/>
+			</p:panelGrid>
+		</p:panelGrid>
+	</h:body>
+</html>
