@@ -6,22 +6,20 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
-import org.ocpsoft.rewrite.el.ELBeanName;
-import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.join.urlShrinker.bean.StatsBean;
 import com.join.urlShrinker.bean.UrlBean;
 import com.join.urlShrinker.bean.UserBean;
 
-@Scope(value = "session")
-@Component(value = "indexController")
-@ELBeanName(value = "indexController")
+@Named
+@ViewScoped
 public class IndexController {
 
 	private String inputText;
@@ -46,17 +44,16 @@ public class IndexController {
 
 	private RestTemplate restTemplate = new RestTemplate();
 
-	public String getGlobalStats() {
+	public void getGlobalStats() {
 		ResponseEntity<StatsBean> restResult = this.restTemplate.getForEntity("http://localhost:8080/stats", StatsBean.class);
 
 		if (restResult.getStatusCode().equals(HttpStatus.OK))
 			this.setStatsBean(restResult.getBody());
 
 		this.clean(this.getStatsBean());
-		return "index.xhtml";
 	}
 
-	public String getUserStats() {
+	public void getUserStats() {
 		ResponseEntity<?> restResult = null;
 		FacesContext context = FacesContext.getCurrentInstance();
 
@@ -76,11 +73,9 @@ public class IndexController {
 			context.addMessage("warningKeyMessage", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid User Id!", null));
 			this.clean(null);
 		}
-
-		return "index.xhtml";
 	}
 
-	public String getUrlStats() {
+	public void getUrlStats() {
 		ResponseEntity<?> restResult = null;
 		FacesContext context = FacesContext.getCurrentInstance();
 
@@ -102,11 +97,9 @@ public class IndexController {
 			context.addMessage("warningKeyMessage", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid URL Id!", null));
 			this.clean(null);
 		}
-
-		return "index.xhtml";
 	}
 
-	public String addUser() {
+	public void addUser() {
 		FacesContext context = FacesContext.getCurrentInstance();
 
 		if (this.inputText.trim().length() > 0) {
@@ -123,11 +116,9 @@ public class IndexController {
 			context.addMessage("warningKeyMessage", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid User Name!", null));
 			this.clean(null);
 		}
-
-		return "index.xhtml";
 	}
 
-	public String addUrl() {
+	public void addUrl() {
 		ResponseEntity<?> restResult = null;
 		FacesContext context = FacesContext.getCurrentInstance();
 
@@ -155,11 +146,9 @@ public class IndexController {
 			context.addMessage("warningKeyMessage", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid User Id!", null));
 			this.clean(null);
 		}
-
-		return "index.xhtml";
 	}
 
-	public String deleteUser() {
+	public void deleteUser() {
 		ResponseEntity<?> restResult = null;
 		FacesContext context = FacesContext.getCurrentInstance();
 
@@ -177,11 +166,9 @@ public class IndexController {
 		}
 
 		this.clean(null);
-
-		return "index.xhtml";
 	}
 
-	public String deleteUrl() {
+	public void deleteUrl() {
 		ResponseEntity<?> restResult = null;
 		FacesContext context = FacesContext.getCurrentInstance();
 
@@ -201,8 +188,6 @@ public class IndexController {
 			context.addMessage("warningKeyMessage", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid URL Id!", null));
 			this.clean(null);
 		}
-
-		return "index.xhtml";
 	}
 
 	public String getInputText() {
