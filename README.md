@@ -4,7 +4,7 @@ The URLShrinker is a Java software which turns URL hyperlinks, like "https://tra
 
 Its main part is a web application server that can be tested whether by command line utility or by a web application client.
 
-## Prerequisites
+## Requirements
 - JDK 1.8 or later
 - Maven 3 or later
 - Git
