@@ -12,7 +12,7 @@
         <module>commons</module>
         <module>server</module>
         <module>jsfClient</module>
-        <module>angularJSFClient</module>
+        <module>angularJSClient</module>
     </modules>
 
 </project>
