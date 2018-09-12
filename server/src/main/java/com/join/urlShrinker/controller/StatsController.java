@@ -35,7 +35,7 @@ public class StatsController {
 
 		for (int i = 0; i < 10 && i < topUrlIds.size(); i++) {
 			urlDataArray = topUrlIds.get(i);
-			urlBean = new UrlBean(this.urlRepository.findOne((Integer) urlDataArray[0]));
+			urlBean = new UrlBean(this.urlRepository.getOne((Integer) urlDataArray[0]));
 			urlBean.setHits(((Long) urlDataArray[1]).intValue());
 			topUrls.add(urlBean);
 		}
@@ -46,8 +46,13 @@ public class StatsController {
 
 	@RequestMapping("/stats/{urlId}")
 	public ResponseEntity<?> getUrlStats(@PathVariable Integer urlId) {
-		Url url = this.urlRepository.findOne(urlId);
+		Url url = null;
 		ResponseEntity<?> result;
+
+		try {
+			url = this.urlRepository.findById(urlId).get();
+		} catch (Exception e) {
+		}
 
 		if (url != null) {
 			UrlBean urlBean = new UrlBean(url);

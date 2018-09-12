@@ -32,7 +32,12 @@ public class UsersController {
 	@RequestMapping(value="/users/{userId}/urls", method=RequestMethod.POST)
 	public ResponseEntity<?> addUrls(@PathVariable Integer userId, @RequestBody List<String> urls) {
 		ResponseEntity<?> result;
-		User user = this.userRepository.findOne(userId);
+		User user = null;
+
+		try {
+			user = this.userRepository.findById(userId).get();
+		} catch (Exception e) {
+		}
 
 		if (user != null) {
 			for (String urlName: urls) {
@@ -98,7 +103,12 @@ public class UsersController {
 
 	@RequestMapping(value="/user/{userId}", method=RequestMethod.DELETE)
 	public ResponseEntity<?> deleteUser(@PathVariable Integer userId) {
-		User user = this.userRepository.findOne(userId);
+		User user = null;
+
+		try {
+			user = this.userRepository.findById(userId).get();
+		} catch (Exception e) {
+		}
 
 		if (user != null) {
 			this.userRepository.delete(user);
