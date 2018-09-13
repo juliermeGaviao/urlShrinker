@@ -57,7 +57,7 @@ public class UrlShrinkerServerApplication implements CommandLineRunner {
 		userJohn.getUserUrls().add(johnGoogle);
 
 		// Saving URLs, which are relationship referenced entities
-		this.urlRepository.save(new ArrayList<Url>() {
+		this.urlRepository.saveAll(new ArrayList<Url>() {
 			private static final long serialVersionUID = 7277707135175253649L;
 			{
 				add(urlGoogle);
@@ -71,7 +71,7 @@ public class UrlShrinkerServerApplication implements CommandLineRunner {
 		urlAmazon.getUserUrls().add(fooBarAmazon);
 		urlAmazon.getUserUrls().add(johnAmazon);
 		urlGoogle.getUserUrls().add(johnAmazon);
-		this.userRepository.save(new ArrayList<User>() {
+		this.userRepository.saveAll(new ArrayList<User>() {
 			private static final long serialVersionUID = -428607830363289575L;
 			{
 				add(userFooBar);

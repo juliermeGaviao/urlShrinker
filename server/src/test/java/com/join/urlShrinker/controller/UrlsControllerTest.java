@@ -60,13 +60,13 @@ public class UrlsControllerTest {
 	@Test
 	public void deleteUrl() {
 		try {
-			this.mockMvc.perform(post(new URI("/users/2/urls")).content("[\"http://www.terra.com.br\"]").contentType(this.jsonContentType)).andExpect(status().isCreated());
+			this.mockMvc.perform(post(new URI("/users/4/urls")).content("[\"http://www.terra.com.br\"]").contentType(this.jsonContentType)).andExpect(status().isCreated());
 
-			this.mockMvc.perform(delete(new URI("/urls/3")).contentType(this.jsonContentType)).andExpect(status().isOk())
+			this.mockMvc.perform(delete(new URI("/urls/6")).contentType(this.jsonContentType)).andExpect(status().isOk())
 				.andExpect(content().contentType(this.textPlainContentType))
 				.andExpect(content().string("Url successfully deleted!"));
 
-			this.mockMvc.perform(delete(new URI("/urls/3")).accept(this.jsonContentType)).andExpect(status().isNoContent())
+			this.mockMvc.perform(delete(new URI("/urls/6")).accept(this.jsonContentType)).andExpect(status().isNoContent())
 				.andExpect(content().contentType(this.jsonContentType))
 				.andExpect(content().string("Url Id doesn't exist!"));
 		} catch (URISyntaxException e) {

@@ -5,68 +5,54 @@
 
     <groupId>com.join</groupId>
     <artifactId>urlShrinkerJSFClient</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <packaging>jar</packaging>
 
     <parent>
         <groupId>org.joinfaces</groupId>
-        <artifactId>jsf-spring-boot-parent</artifactId>
-        <version>2.4.1</version>
+        <artifactId>joinfaces-parent</artifactId>
+        <version>3.2.4</version>
         <relativePath/>
     </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <powermock.version>2.0.0-beta.5</powermock.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-	    <dependency>
-	      <groupId>org.joinfaces</groupId>
-	      <artifactId>jsf-spring-boot-starter</artifactId>
-	    </dependency>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>		
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-logging</artifactId>
+            <groupId>org.joinfaces</groupId>
+            <artifactId>butterfaces-spring-boot-starter</artifactId>
         </dependency>
-		<dependency>
-			<groupId>org.primefaces</groupId>
-			<artifactId>primefaces</artifactId>
-		</dependency>
-		<dependency>
-		    <groupId>org.ocpsoft.rewrite</groupId>
-		    <artifactId>rewrite-servlet</artifactId>
-		    <version>3.4.1.Final</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.ocpsoft.rewrite</groupId>
-		    <artifactId>rewrite-integration-faces</artifactId>
-		    <version>3.4.1.Final</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.ocpsoft.rewrite</groupId>
-		    <artifactId>rewrite-config-prettyfaces</artifactId>
-		    <version>3.4.1.Final</version>
-		</dependency>
+        <dependency>
+            <groupId>org.joinfaces</groupId>
+            <artifactId>primefaces-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+        </dependency>
 		<dependency>
 		    <groupId>org.powermock</groupId>
 		    <artifactId>powermock-module-junit4</artifactId>
-		    <version>1.6.4</version>
+		    <version>${powermock.version}</version>
 		    <scope>test</scope>
 		</dependency> 
 		<dependency>
 		    <groupId>org.powermock</groupId>
-		    <artifactId>powermock-api-mockito</artifactId>
-		    <version>1.6.4</version>
+		    <artifactId>powermock-api-mockito2</artifactId>
+		    <version>${powermock.version}</version>
 		    <scope>test</scope>
 		</dependency>
         <dependency>

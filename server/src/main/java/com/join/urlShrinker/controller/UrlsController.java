@@ -27,8 +27,13 @@ public class UrlsController {
 
 	@RequestMapping(value="/urls/{urlId}", method=RequestMethod.DELETE)
 	public ResponseEntity<?> deleteUrl(@PathVariable Integer urlId) {
-		Url url = this.urlRepository.findOne(urlId);
+		Url url = null;
 		ResponseEntity<?> result;
+
+		try {
+			url = this.urlRepository.findById(urlId).get();
+		} catch (Exception e) {
+		}
 
 		if (url != null) {
 			this.urlRepository.delete(url);

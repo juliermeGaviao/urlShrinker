@@ -1,3 +1,8 @@
 server:
   port: 9090
-  context-path: /urlShrinkerJSF
+  servlet:
+    context-path: /urlShrinkerJSF
+
+jsf:
+  butterfaces:
+    useCompressedResources: true
