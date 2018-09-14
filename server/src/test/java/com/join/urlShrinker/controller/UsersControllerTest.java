@@ -38,14 +38,14 @@ public class UsersControllerTest {
 	@Test
 	public void addUrls() {
 		try {
-			this.mockMvc.perform(post(new URI("/users/4/urls")).content("[\"http://www.terra.com.br\"]").contentType(this.jsonContentType)).andExpect(status().isCreated())
+			this.mockMvc.perform(post(new URI("/users/2/urls")).content("[\"http://www.terra.com.br\"]").contentType(this.jsonContentType)).andExpect(status().isCreated())
 				.andExpect(content().contentType(this.jsonContentType));
 
-			this.mockMvc.perform(post(new URI("/users/7/urls")).content("[\"http://www.terra.com.br\"]").contentType(this.jsonContentType)).andExpect(status().isNoContent())
+			this.mockMvc.perform(post(new URI("/users/4/urls")).content("[\"http://www.terra.com.br\"]").contentType(this.jsonContentType)).andExpect(status().isNoContent())
 				.andExpect(content().contentType(this.textPlainContentType))
 				.andExpect(content().string("User Id not found!"));
 			
-			this.mockMvc.perform(delete(new URI("/urls/7")).contentType(this.jsonContentType)).andExpect(status().isOk())
+			this.mockMvc.perform(delete(new URI("/urls/4")).contentType(this.jsonContentType)).andExpect(status().isOk())
 				.andExpect(content().contentType(this.textPlainContentType))
 				.andExpect(content().string("Url successfully deleted!"));
 		} catch (URISyntaxException e) {
@@ -79,7 +79,7 @@ public class UsersControllerTest {
 		try {
 			this.mockMvc.perform(post(new URI("/users/Andy"))).andExpect(status().isCreated())
 			.andExpect(content().contentType(this.jsonContentType))
-			.andExpect(jsonPath("id", is(8)))
+			.andExpect(jsonPath("id", is(4)))
 			.andExpect(jsonPath("userName", is("Andy")))
 			.andExpect(jsonPath("urls", hasSize(0)));
 

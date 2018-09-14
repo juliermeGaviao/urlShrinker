@@ -11,11 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import lombok.Data;
+
+@Data
 @Entity
 public class Url {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotNull
@@ -27,8 +30,7 @@ public class Url {
     @OneToMany(mappedBy = "url", cascade=CascadeType.ALL)
     private List<UserUrl> userUrls;
 
-    public Url(){
-
+    public Url() {
     }
 
     public Url(String url, String shortUrl){
@@ -36,38 +38,6 @@ public class Url {
         this.setShortUrl(shortUrl);
         this.setUserUrls(new ArrayList<UserUrl>());
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public List<UserUrl> getUserUrls() {
-        return userUrls;
-    }
-
-    public void setUserUrls(List<UserUrl> userUrls) {
-        this.userUrls = userUrls;
-    }
-
-	public String getShortUrl() {
-		return shortUrl;
-	}
-
-	public void setShortUrl(String shortUrl) {
-		this.shortUrl = shortUrl;
-	}
 
     @Override
     public String toString() {
