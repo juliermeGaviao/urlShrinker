@@ -10,6 +10,8 @@ Its main part is a web application server that can be tested whether by command 
 - Git
 - Curl
 
+If you're using Eclipse or one of its spin-offs, you must install lombok plugin for correctly code compiling. You may install such plugin using the documentation at [Project Lombok](https://projectlombok.org/setup/eclipse).
+
 ## Installation
 
 The installation procedure below was tested upon a Ubuntu Linux desktop, version 17.10.
