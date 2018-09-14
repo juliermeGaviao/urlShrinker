@@ -21,11 +21,11 @@
     <changeSet id="2" author="Julierme">
     	<insert tableName="Url">
     		<column name="url" value="http://www.google.com.br"/>
-    		<column name="short_url" valueComputed="concat('http://urlShrinker.com.br/', DATEDIFF('SECOND', DATE '1970-01-01', CURRENT_TIMESTAMP()) * 1000)"/>
+    		<column name="short_url" valueComputed="concat('http://urlShrinker.com.br/', datediff('SECOND', DATE '1970-01-01', current_timestamp) * 1000)"/>
     	</insert>
     	<insert tableName="Url">
     		<column name="url" value="http://www.amazon.com"/>
-    		<column name="short_url" valueComputed="concat('http://urlShrinker.com.br/', DATEDIFF('SECOND', DATE '1970-01-01', CURRENT_TIMESTAMP()) * 1000 + 1)"/>
+    		<column name="short_url" valueComputed="concat('http://urlShrinker.com.br/', datediff('SECOND', DATE '1970-01-01', current_timestamp) * 1000 + 1)"/>
     	</insert>
     </changeSet>
 
