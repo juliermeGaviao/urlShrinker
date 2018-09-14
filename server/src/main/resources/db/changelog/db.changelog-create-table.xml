@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="Julierme">
+        <createTable tableName="Url">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="url" type="varchar(2000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="short_url" type="varchar(2000)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="Url" columnName="id" columnDataType="int" incrementBy="1" startWith="1"/>
+    </changeSet>
+
+    <changeSet id="2" author="Julierme">
+        <createTable tableName="User">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_name" type="varchar(2000)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addAutoIncrement tableName="User" columnName="id" columnDataType="int" incrementBy="1" startWith="1"/>
+    </changeSet>
+
+    <changeSet id="3" author="Julierme">
+        <createTable tableName="User_Url">
+            <column name="url_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="count" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="User_Url" columnNames="url_id, user_id" constraintName="PK_UserUrl"/>
+        <addForeignKeyConstraint constraintName="FK_UserUrl_Url" referencedTableName="Url" baseColumnNames="url_id" baseTableName="User_Url" referencedColumnNames="id" onUpdate="CASCADE" onDelete="CASCADE"/>
+        <addForeignKeyConstraint constraintName="FK_UserUrl_User" referencedTableName="User" baseColumnNames="user_id" baseTableName="User_Url" referencedColumnNames="id" onUpdate="CASCADE" onDelete="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>

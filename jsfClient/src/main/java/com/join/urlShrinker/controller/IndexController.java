@@ -18,6 +18,11 @@ import com.join.urlShrinker.bean.StatsBean;
 import com.join.urlShrinker.bean.UrlBean;
 import com.join.urlShrinker.bean.UserBean;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Named
 @ViewScoped
 public class IndexController {
@@ -188,46 +193,6 @@ public class IndexController {
 			context.addMessage("warningKeyMessage", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid URL Id!", null));
 			this.clean(null);
 		}
-	}
-
-	public String getInputText() {
-		return inputText;
-	}
-
-	public void setInputText(String inputText) {
-		this.inputText = inputText;
-	}
-
-	public String getInputText2() {
-		return inputText2;
-	}
-
-	public void setInputText2(String inputText2) {
-		this.inputText2 = inputText2;
-	}
-
-	public StatsBean getStatsBean() {
-		return statsBean;
-	}
-
-	public void setStatsBean(StatsBean statsBean) {
-		this.statsBean = statsBean;
-	}
-
-	public List<UrlBean> getUrlBeans() {
-		return urlBeans;
-	}
-
-	public void setUrlBeans(List<UrlBean> urlBeans) {
-		this.urlBeans = urlBeans;
-	}
-
-	public UserBean getUserBean() {
-		return userBean;
-	}
-
-	public void setUserBean(UserBean userBean) {
-		this.userBean = userBean;
 	}
 
 }
