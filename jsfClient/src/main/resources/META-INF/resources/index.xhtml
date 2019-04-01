@@ -57,10 +57,10 @@
 		</p:panelGrid>
 		<p:spacer height="10"/>
 		<p:panelGrid id="resultTable" columns="1" style="width:100%">
-			<p:panelGrid columns="1" rendered="#{indexController.statsBean ne null}">
-				<p:outputLabel value="Hits: #{indexController.statsBean.hits}"/>
-				<p:outputLabel value="URL Count: #{indexController.statsBean.urlCount}"/>
-				<p:dataTable var="url" value="#{indexController.statsBean.topUrls}">
+			<p:panelGrid columns="1" rendered="#{indexController.statsDto ne null}">
+				<p:outputLabel value="Hits: #{indexController.statsDto.hits}"/>
+				<p:outputLabel value="URL Count: #{indexController.statsDto.urlCount}"/>
+				<p:dataTable var="url" value="#{indexController.statsDto.topUrls}">
 					<f:facet name="header">URLs</f:facet>
 					<p:column headerText="Id" style="width:5%"><h:outputText value="#{url.id}"/></p:column>
 					<p:column headerText="Hits" style="width:5%"><h:outputText value="#{url.hits}"/></p:column>
@@ -68,16 +68,16 @@
 					<p:column headerText="Short URL"><h:outputText value="#{url.shortUrl}"/></p:column>
 				</p:dataTable>
 			</p:panelGrid>
-			<p:dataTable var="url" value="#{indexController.urlBeans}" rendered="#{indexController.urlBeans ne null}">
+			<p:dataTable var="url" value="#{indexController.urlDtos}" rendered="#{indexController.urlDtos ne null}">
 				<f:facet name="header">URLs</f:facet>
 				<p:column headerText="Id" style="width:5%"><h:outputText value="#{url.id}"/></p:column>
 				<p:column headerText="Hits" style="width:5%"><h:outputText value="#{url.hits}"/></p:column>
 				<p:column headerText="URL"><h:outputText value="#{url.url}"/></p:column>
 				<p:column headerText="Short URL"><h:outputText value="#{url.shortUrl}"/></p:column>
 			</p:dataTable>
-			<p:panelGrid columns="2" rendered="#{indexController.userBean ne null}" style="width:100%">
-				<p:outputLabel value="Id: #{indexController.userBean.id}"/>
-				<p:outputLabel value="User name: #{indexController.userBean.userName}"/>
+			<p:panelGrid columns="2" rendered="#{indexController.userDto ne null}" style="width:100%">
+				<p:outputLabel value="Id: #{indexController.userDto.id}"/>
+				<p:outputLabel value="User name: #{indexController.userDto.userName}"/>
 			</p:panelGrid>
 		</p:panelGrid>
 	</h:body>

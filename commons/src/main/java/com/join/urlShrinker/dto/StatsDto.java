@@ -1,15 +1,15 @@
-package com.join.urlShrinker.bean;
+package com.join.urlShrinker.dto;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class StatsBean implements Serializable {
+public class StatsDto implements Serializable {
 
 	private static final long serialVersionUID = -2027999314786698912L;
 
 	private Long hits;
 	private Long urlCount;
-	private List<UrlBean> topUrls;
+	private List<UrlDto> topUrls;
 
 	public Long getHits() {
 		return hits;
@@ -27,11 +27,11 @@ public class StatsBean implements Serializable {
 		this.urlCount = urlCount;
 	}
 
-	public List<UrlBean> getTopUrls() {
+	public List<UrlDto> getTopUrls() {
 		return topUrls;
 	}
 
-	public void setTopUrls(List<UrlBean> topUrls) {
+	public void setTopUrls(List<UrlDto> topUrls) {
 		this.topUrls = topUrls;
 	}
 

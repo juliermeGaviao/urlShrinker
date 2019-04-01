@@ -13,6 +13,7 @@
         <module>server</module>
         <module>jsfClient</module>
         <module>angularJSClient</module>
+        <module>vueClient</module>
     </modules>
 
 </project>

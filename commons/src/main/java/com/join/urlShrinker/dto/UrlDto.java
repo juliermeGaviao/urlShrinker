@@ -1,10 +1,8 @@
-package com.join.urlShrinker.bean;
+package com.join.urlShrinker.dto;
 
 import java.io.Serializable;
 
-import com.join.urlShrinker.model.Url;
-
-public class UrlBean implements Serializable {
+public class UrlDto implements Serializable {
 
 	private static final long serialVersionUID = 5995561557899692055L;
 
@@ -13,11 +11,7 @@ public class UrlBean implements Serializable {
 	private String url;
 	private String shortUrl;
 
-	public UrlBean() {
-	}
-
-	public UrlBean(Url url) {
-		this.setUrl(url);
+	public UrlDto() {
 	}
 	
 	public int getId() {
@@ -50,12 +44,6 @@ public class UrlBean implements Serializable {
 
 	public void setShortUrl(String shortUrl) {
 		this.shortUrl = shortUrl;
-	}
-
-	public void setUrl(Url url) {
-		this.setId(url.getId());
-		this.setUrl(url.getUrl());
-		this.setShortUrl(url.getShortUrl());
 	}
 
     @Override

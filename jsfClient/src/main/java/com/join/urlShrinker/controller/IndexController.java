@@ -14,9 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import com.join.urlShrinker.bean.StatsBean;
-import com.join.urlShrinker.bean.UrlBean;
-import com.join.urlShrinker.bean.UserBean;
+import com.join.urlShrinker.dto.StatsDto;
+import com.join.urlShrinker.dto.UrlDto;
+import com.join.urlShrinker.dto.UserDto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,33 +29,33 @@ public class IndexController {
 
 	private String inputText;
 	private String inputText2;
-	private StatsBean statsBean;
-	private List<UrlBean> urlBeans;
-	private UserBean userBean;
+	private StatsDto statsDto;
+	private List<UrlDto> urlDtos;
+	private UserDto userDto;
 
 	private void clean(Object exception) {
 		this.setInputText(null);
 		this.setInputText2(null);
 
-		if (exception != this.statsBean)
-			this.setStatsBean(null);
+		if (exception != this.statsDto)
+			this.setStatsDto(null);
 
-		if (exception != this.urlBeans)
-			this.setUrlBeans(null);
+		if (exception != this.urlDtos)
+			this.setUrlDtos(null);
 
-		if (exception != this.userBean)
-			this.setUserBean(null);
+		if (exception != this.userDto)
+			this.setUserDto(null);
 	}
 
 	private RestTemplate restTemplate = new RestTemplate();
 
 	public void getGlobalStats() {
-		ResponseEntity<StatsBean> restResult = this.restTemplate.getForEntity("http://localhost:8080/stats", StatsBean.class);
+		ResponseEntity<StatsDto> restResult = this.restTemplate.getForEntity("http://localhost:8080/stats", StatsDto.class);
 
 		if (restResult.getStatusCode().equals(HttpStatus.OK))
-			this.setStatsBean(restResult.getBody());
+			this.setStatsDto(restResult.getBody());
 
-		this.clean(this.getStatsBean());
+		this.clean(this.getStatsDto());
 	}
 
 	public void getUserStats() {
@@ -65,11 +65,11 @@ public class IndexController {
 		try {
 			Integer.parseInt(this.inputText);
 
-			restResult = this.restTemplate.getForEntity("http://localhost:8080/users/{userId}/stats", UrlBean[].class, this.inputText);
+			restResult = this.restTemplate.getForEntity("http://localhost:8080/users/{userId}/stats", UrlDto[].class, this.inputText);
 
 			if (restResult.getStatusCode().equals(HttpStatus.OK)) {
-				this.setUrlBeans(Arrays.asList((UrlBean[]) restResult.getBody()));
-				this.clean(this.getUrlBeans());
+				this.setUrlDtos(Arrays.asList((UrlDto[]) restResult.getBody()));
+				this.clean(this.getUrlDtos());
 			} else {
 				context.addMessage("warningKeyMessage", new FacesMessage(FacesMessage.SEVERITY_ERROR, "User Id doesn't exist or has no URL associated to", null));
 				this.clean(null);
@@ -87,13 +87,13 @@ public class IndexController {
 		try {
 			Integer.parseInt(this.inputText);
 
-			restResult = this.restTemplate.getForEntity("http://localhost:8080/urls/{urlId}", UrlBean.class, this.inputText);
+			restResult = this.restTemplate.getForEntity("http://localhost:8080/urls/{urlId}", UrlDto.class, this.inputText);
 
 			if (restResult.getStatusCode().equals(HttpStatus.OK)) {
-				List<UrlBean> urlBeanList = new ArrayList<UrlBean>();
-				urlBeanList.add((UrlBean) restResult.getBody());
-				this.setUrlBeans(urlBeanList);
-				this.clean(this.getUrlBeans());
+				List<UrlDto> urlDtoList = new ArrayList<UrlDto>();
+				urlDtoList.add((UrlDto) restResult.getBody());
+				this.setUrlDtos(urlDtoList);
+				this.clean(this.getUrlDtos());
 			} else {
 				context.addMessage("warningKeyMessage", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Url Id doesn't exist!", null));
 				this.clean(null);
@@ -108,11 +108,11 @@ public class IndexController {
 		FacesContext context = FacesContext.getCurrentInstance();
 
 		if (this.inputText.trim().length() > 0) {
-			ResponseEntity<?> restResult = this.restTemplate.postForEntity("http://localhost:8080/users/{userName}", null, UserBean.class, this.inputText.trim());
+			ResponseEntity<?> restResult = this.restTemplate.postForEntity("http://localhost:8080/users/{userName}", null, UserDto.class, this.inputText.trim());
 
 			if (restResult.getStatusCode().equals(HttpStatus.CREATED)) {
-				this.setUserBean((UserBean) restResult.getBody());
-				this.clean(this.getUserBean());
+				this.setUserDto((UserDto) restResult.getBody());
+				this.clean(this.getUserDto());
 			} else {
 				context.addMessage("warningKeyMessage", new FacesMessage(FacesMessage.SEVERITY_ERROR, "The user [username=" + this.inputText + "] already exists!", null));
 				this.clean(null);
@@ -134,11 +134,11 @@ public class IndexController {
 				List<String> urls = new ArrayList<String>();
 
 				urls.add(this.inputText2);
-				restResult = this.restTemplate.postForEntity("http://localhost:8080/users/{userId}/urls", urls, UrlBean[].class, this.inputText);
+				restResult = this.restTemplate.postForEntity("http://localhost:8080/users/{userId}/urls", urls, UrlDto[].class, this.inputText);
 
 				if (restResult.getStatusCode().equals(HttpStatus.CREATED)) {
-					this.setUrlBeans(Arrays.asList((UrlBean[]) restResult.getBody()));
-					this.clean(this.getUrlBeans());
+					this.setUrlDtos(Arrays.asList((UrlDto[]) restResult.getBody()));
+					this.clean(this.getUrlDtos());
 				} else {
 					context.addMessage("warningKeyMessage", new FacesMessage(FacesMessage.SEVERITY_ERROR, "User Id doesn't exist!", null));
 					this.clean(null);

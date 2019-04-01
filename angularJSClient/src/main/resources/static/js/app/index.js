@@ -59,7 +59,7 @@ app.controller('urlShrinkerCtrl', function($scope, $http, $location) {
 
 	$scope.userRecordVisible = false;
 	$scope.username = "";
-	$scope.userBean;
+	$scope.userDto;
 
 	$scope.addUser = function() {
 		$scope.hideAll();
@@ -67,11 +67,11 @@ app.controller('urlShrinkerCtrl', function($scope, $http, $location) {
 		if ($scope.username.trim().length == 0) {
 			alert("Invalid User Name!");
 		} else {
-			var userBean = {"userName": $scope.username};
+			var userDto = {"userName": $scope.username};
 
-			$http.post(url + "/addUser", userBean).then(function(response) {
+			$http.post(url + "/addUser", userDto).then(function(response) {
 				if (response.status == 201) {
-					$scope.userBean = response.data;
+					$scope.userDto = response.data;
 					$scope.userRecordVisible = true;
 				} else if (response.status == 204) {
 					alert("The user [username=" + $scope.username + "] already exists!");
@@ -91,9 +91,9 @@ app.controller('urlShrinkerCtrl', function($scope, $http, $location) {
 		} else if ($scope.hyperlink.trim().length == 0) {
 			alert("Invalid Hyperlink!");
 		} else {
-			var urlBean = {"url" : $scope.hyperlink};
+			var urlDto = {"url" : $scope.hyperlink};
 
-			$http.post(url + "/addUrl/" + $scope.idUserHyperlink, urlBean).then(function(response) {
+			$http.post(url + "/addUrl/" + $scope.idUserHyperlink, urlDto).then(function(response) {
 				if (response.status == 201) {
 					$scope.urlStatsBean = response.data;
 					$scope.urlStatsVisible = true;

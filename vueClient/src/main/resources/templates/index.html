@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>URL Shrinker Vue Client</title>
+
+	<link rel="stylesheet" href="css/lib/vuetify.min.css"/>
+	<link rel="stylesheet" href="css/lib/materialdesignicons.min.css"/>
+	<link rel="stylesheet" href="css/app/app.css"/>
+</head>
+<body>
+	<div id="app">
+		<v-app>
+			<v-content>
+				<v-container>
+					<v-layout row>
+						<v-flex xs12 text-xs-center>
+							<v-alert type="warning" v-show="!vazioLen(alerta)" icon="mdi-alert">{{alerta}}</v-alert>
+							<v-alert type="success" v-show="!vazioLen(sucesso)" icon="mdi-checkbox-marked-circle">{{sucesso}}</v-alert>
+							<v-btn v-on:click="getGlobalStats" small color="primary">Get Global Statistics</v-btn>
+						</v-flex>
+					</v-layout>
+					<v-layout row>
+						<v-flex xs3><v-text-field placeholder="User Id" v-model.number="statsIdUser" type="number"></v-text-field></v-flex>
+						<v-flex xs3 pt-3><v-btn v-on:click="getUserStats" small color="primary">Get User Statistics</v-btn></v-flex>
+						<v-flex xs3><v-text-field placeholder="URL Id" v-model.number="statsIdUrl" type="number"></v-text-field></v-flex>
+						<v-flex xs3 pt-3><v-btn v-on:click="getUrlStats" small color="primary">Get URL Statistics</v-btn></v-flex>
+					</v-layout>
+					<v-layout row>
+						<v-flex xs3><v-text-field placeholder="User name" v-model.trim="username"></v-text-field></v-flex>
+						<v-flex xs3 pt-3><v-btn v-on:click="addUser" small color="primary">Add User</v-btn></v-flex>
+						<v-flex xs2><v-text-field placeholder="User Id" v-model.number="idUserHyperlink" type="number"></v-text-field></v-flex>
+						<v-flex xs2><v-text-field placeholder="Hperlink" v-model.trim="hyperlink"></v-text-field></v-flex>
+						<v-flex xs2 pt-3><v-btn v-on:click="addUrl" small color="primary">Add URL</v-btn></v-flex>
+					</v-layout>
+					<v-layout row>
+						<v-flex xs3><v-text-field placeholder="User Id" v-model.number="deleteIdUser" type="number"></v-text-field></v-flex>
+						<v-flex xs3 pt-3><v-btn v-on:click="deleteUser" small color="primary">Delete User</v-btn></v-flex>
+						<v-flex xs3><v-text-field placeholder="URL Id" v-model.number="deleteIdUrl" type="number"></v-text-field></v-flex>
+						<v-flex xs3 pt-3><v-btn v-on:click="deleteUrl" small color="primary">Delete URL</v-btn></v-flex>
+					</v-layout>
+				</v-container>
+				<v-container v-show="globalStatsVisible">
+					<v-layout row>
+						<v-flex xs6>Hits: {{statsDto.hits}}</v-flex>
+						<v-flex xs6>URL Count: {{statsDto.urlCount}}</v-flex>
+					</v-layout>
+				</v-container>
+				<v-data-table v-show="urlStatsVisible" :headers="headers" :items="urlStatsDto"
+					rows-per-page-text="Registros por página" hide-actions="true"
+					prev-icon="mdi-menu-left" next-icon="mdi-menu-right" sort-icon="mdi-menu-down">
+					<template v-slot:items="urls">
+						<td>{{urls.item.id}}</td>
+						<td>{{urls.item.hits}}</td>
+						<td>{{urls.item.url}}</td>
+						<td>{{urls.item.shortUrl}}</td>
+					</template>
+				</v-data-table>
+			</v-content>
+		</v-app>
+	</div>
+
+	<script src="js/lib/vue.min.js"></script>
+	<script src="js/lib/axios.min.js"></script>
+	<script src="js/lib/vuetify.min.js"></script>
+	<script src="js/app/index.js"></script>
+
+
+		<!--table>
+		<table v-if="urlStatsVisible">
+			<thead>
+				<tr>
+					<th colspan="4" class="cellBorder">URLs</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th class="cellBorder">Id</th>
+					<th class="cellBorder">Hits</th>
+					<th class="cellBorder">URL</th>
+					<th class="cellBorder">Short URL</th>
+				</tr>
+				<tr v-for="url in urlStatsDto">
+					<td class="cellBorder" style="text-align:center">{{url.id}}</td>
+					<td class="cellBorder" style="text-align:center">{{url.hits}}</td>
+					<td class="cellBorder">{{url.url}}</td>
+					<td class="cellBorder">{{url.shortUrl}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<table v-if="userRecordVisible">
+			<tbody>
+				<tr>
+					<td style="width:50%" class="cellBorder">Id: {{userDto.id}}</td>
+					<td class="cellBorder">User name: {{userDto.userName}}</td>
+				</tr>
+				<tr>
+					<td colspan="2">&nbsp;</td>
+				</tr>
+			</tbody>
+		</table-->
+</body>
+</html>

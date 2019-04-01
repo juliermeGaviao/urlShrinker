@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.join.urlShrinker.bean.StatsBean;
-import com.join.urlShrinker.bean.UrlBean;
+import com.join.urlShrinker.converter.UrlConverter;
+import com.join.urlShrinker.dto.StatsDto;
+import com.join.urlShrinker.dto.UrlDto;
 import com.join.urlShrinker.model.Url;
 import com.join.urlShrinker.repository.UrlRepository;
 
@@ -21,27 +22,30 @@ public class StatsController {
     @Autowired
     private UrlRepository urlRepository;
 
+    @Autowired
+    private UrlConverter urlConverter;
+
 	@RequestMapping("/stats")
-	public ResponseEntity<StatsBean> getStats() {
-		StatsBean statsBean = new StatsBean();
+	public ResponseEntity<StatsDto> getStats() {
+		StatsDto statsBean = new StatsDto();
 
 		statsBean.setHits(this.urlRepository.getUrlHits());
 		statsBean.setUrlCount(new Long(this.urlRepository.findAll().size()));
 
-		List<UrlBean> topUrls = new ArrayList<UrlBean>();
+		List<UrlDto> topUrls = new ArrayList<UrlDto>();
 		List<Object[]> topUrlIds = this.urlRepository.getTopUrls();
 		Object[] urlDataArray;
-		UrlBean urlBean;
+		UrlDto urlDto;
 
 		for (int i = 0; i < 10 && i < topUrlIds.size(); i++) {
 			urlDataArray = topUrlIds.get(i);
-			urlBean = new UrlBean(this.urlRepository.getOne((Integer) urlDataArray[0]));
-			urlBean.setHits(((Long) urlDataArray[1]).intValue());
-			topUrls.add(urlBean);
+			urlDto = this.urlConverter.entity2Dto(this.urlRepository.getOne((Integer) urlDataArray[0]));
+			urlDto.setHits(((Long) urlDataArray[1]).intValue());
+			topUrls.add(urlDto);
 		}
 		statsBean.setTopUrls(topUrls);
 
-		return new ResponseEntity<StatsBean>(statsBean, HttpStatus.OK);
+		return new ResponseEntity<StatsDto>(statsBean, HttpStatus.OK);
 	}
 
 	@RequestMapping("/stats/{urlId}")
@@ -55,9 +59,9 @@ public class StatsController {
 		}
 
 		if (url != null) {
-			UrlBean urlBean = new UrlBean(url);
-			urlBean.setHits(this.urlRepository.getUrlCount(urlId));
-			result = new ResponseEntity<UrlBean>(urlBean, HttpStatus.OK);
+			UrlDto urlDto = this.urlConverter.entity2Dto(url);
+			urlDto.setHits(this.urlRepository.getUrlCount(urlId));
+			result = new ResponseEntity<UrlDto>(urlDto, HttpStatus.OK);
 		} else
 			result = new ResponseEntity<String>("Url Id doesn't exist!", HttpStatus.NO_CONTENT);
 
