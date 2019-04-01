@@ -86,7 +86,7 @@ The VueJS web application client will be initiated with this command line:
 
 A message like the below one indicates that AngularJS client application is up and running, waiting for requests.
 
-`Started UrlShrinkerAngularJSApplication in x.xxx seconds (JVM running for )`
+`Started UrlShrinkerVueClientApplication in x.xxx seconds (JVM running for )`
 
 
 ## Command Line Endpoints Testing 
