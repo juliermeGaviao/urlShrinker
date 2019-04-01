@@ -75,6 +75,20 @@ A message like the below one indicates that AngularJS client application is up a
 `Started UrlShrinkerAngularJSApplication in x.xxx seconds (JVM running for )`
 
 
+## Runing VueJS Client 
+
+The VueJS web application client will be initiated with this command line:
+
+`cd ../vueClient`
+
+`mvn spring-boot:run`
+
+
+A message like the below one indicates that AngularJS client application is up and running, waiting for requests.
+
+`Started UrlShrinkerAngularJSApplication in x.xxx seconds (JVM running for )`
+
+
 ## Command Line Endpoints Testing 
 
 A little set of users and URLs was built into URLShrink during its startup. Using curl utility command line at the Terminal window, all project endpoints can be tested.
@@ -171,3 +185,9 @@ Alternatively, the URLShrinker server can be tested through a Web Browser. At th
 Other way of testing the URLShrinker server is hitting the following URL, which is developed in AngularJS:
 
 `http://localhost:7070/urlShrinkerAngularJS/home`
+
+## Web Browser Client Testing (VueJS)
+
+The newest way of testing the URLShrinker server is hitting the following URL, which is developed in VueJS:
+
+`localhost:6060/urlShrinkerVue/`
