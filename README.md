@@ -84,9 +84,23 @@ The VueJS web application client will be initiated with this command line:
 `mvn spring-boot:run`
 
 
-A message like the below one indicates that AngularJS client application is up and running, waiting for requests.
+A message like the below one indicates that VueJS client application is up and running, waiting for requests.
 
 `Started UrlShrinkerVueClientApplication in x.xxx seconds (JVM running for )`
+
+
+## Runing VueX Client 
+
+The VueX web application client will be initiated with this command line:
+
+`cd ../vuexClient`
+
+`mvn spring-boot:run`
+
+
+A message like the below one indicates that VueX client application is up and running, waiting for requests.
+
+`Started UrlShrinkerVuexClientApplication in x.xxx seconds (JVM running for )`
 
 
 ## Command Line Endpoints Testing 
@@ -191,3 +205,9 @@ Other way of testing the URLShrinker server is hitting the following URL, which 
 The newest way of testing the URLShrinker server is hitting the following URL, which is developed in VueJS:
 
 `localhost:6060/urlShrinkerVue/`
+
+## Web Browser Client Testing (VueX)
+
+Other way of testing the URLShrinker server is hitting the following URL, which is developed in VueX:
+
+`localhost:5050/urlShrinkerVuex/index.html`

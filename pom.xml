@@ -14,6 +14,7 @@
         <module>jsfClient</module>
         <module>angularJSClient</module>
         <module>vueClient</module>
+        <module>vuexClient</module>
     </modules>
 
 </project>
