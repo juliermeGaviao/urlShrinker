@@ -11,9 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
-import lombok.Data;
-
-@Data
 @Entity
 public class Url {
 
@@ -49,4 +46,38 @@ public class Url {
 
         return result;
     }
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getShortUrl() {
+		return shortUrl;
+	}
+
+	public void setShortUrl(String shortUrl) {
+		this.shortUrl = shortUrl;
+	}
+
+	public List<UserUrl> getUserUrls() {
+		return userUrls;
+	}
+
+	public void setUserUrls(List<UserUrl> userUrls) {
+		this.userUrls = userUrls;
+	}
+
+
 }

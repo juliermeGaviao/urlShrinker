@@ -11,9 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
-import lombok.Data;
-
-@Data
 @Entity
 public class User {
 
@@ -46,4 +43,29 @@ public class User {
 
 		return result;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public List<UserUrl> getUserUrls() {
+		return userUrls;
+	}
+
+	public void setUserUrls(List<UserUrl> userUrls) {
+		this.userUrls = userUrls;
+	}
+
 }

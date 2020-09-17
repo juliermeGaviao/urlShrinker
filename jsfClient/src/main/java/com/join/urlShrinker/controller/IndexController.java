@@ -18,11 +18,6 @@ import com.join.urlShrinker.dto.StatsDto;
 import com.join.urlShrinker.dto.UrlDto;
 import com.join.urlShrinker.dto.UserDto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 @Named
 @ViewScoped
 public class IndexController {
@@ -32,6 +27,46 @@ public class IndexController {
 	private StatsDto statsDto;
 	private List<UrlDto> urlDtos;
 	private UserDto userDto;
+
+	public String getInputText() {
+		return inputText;
+	}
+
+	public void setInputText(String inputText) {
+		this.inputText = inputText;
+	}
+
+	public String getInputText2() {
+		return inputText2;
+	}
+
+	public void setInputText2(String inputText2) {
+		this.inputText2 = inputText2;
+	}
+
+	public StatsDto getStatsDto() {
+		return statsDto;
+	}
+
+	public void setStatsDto(StatsDto statsDto) {
+		this.statsDto = statsDto;
+	}
+
+	public List<UrlDto> getUrlDtos() {
+		return urlDtos;
+	}
+
+	public void setUrlDtos(List<UrlDto> urlDtos) {
+		this.urlDtos = urlDtos;
+	}
+
+	public UserDto getUserDto() {
+		return userDto;
+	}
+
+	public void setUserDto(UserDto userDto) {
+		this.userDto = userDto;
+	}
 
 	private void clean(Object exception) {
 		this.setInputText(null);
