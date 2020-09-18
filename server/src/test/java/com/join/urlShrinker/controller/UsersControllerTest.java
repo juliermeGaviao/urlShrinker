@@ -41,11 +41,11 @@ public class UsersControllerTest {
 			this.mockMvc.perform(post(new URI("/users/2/urls")).content("[\"http://www.terra.com.br\"]").contentType(this.jsonContentType)).andExpect(status().isCreated())
 				.andExpect(content().contentType(this.jsonContentType));
 
-			this.mockMvc.perform(post(new URI("/users/4/urls")).content("[\"http://www.terra.com.br\"]").contentType(this.jsonContentType)).andExpect(status().isNoContent())
+			this.mockMvc.perform(post(new URI("/users/5/urls")).content("[\"http://www.terra.com.br\"]").contentType(this.jsonContentType)).andExpect(status().isNoContent())
 				.andExpect(content().contentType(this.textPlainContentType))
 				.andExpect(content().string("User Id not found!"));
 			
-			this.mockMvc.perform(delete(new URI("/urls/4")).contentType(this.jsonContentType)).andExpect(status().isOk())
+			this.mockMvc.perform(delete(new URI("/urls/3")).contentType(this.jsonContentType)).andExpect(status().isOk())
 				.andExpect(content().contentType(this.textPlainContentType))
 				.andExpect(content().string("Url successfully deleted!"));
 		} catch (URISyntaxException e) {
@@ -58,13 +58,13 @@ public class UsersControllerTest {
 	@Test
 	public void getUserStatsService() {
 		try {
-			this.mockMvc.perform(get(new URI("/users/3/stats")).contentType(this.jsonContentType)).andExpect(status().isOk())
+			this.mockMvc.perform(get(new URI("/users/1/stats")).contentType(this.jsonContentType)).andExpect(status().isOk())
 				.andExpect(content().contentType(this.jsonContentType))
 				.andExpect(jsonPath("[0].id", is(1)))
 				.andExpect(jsonPath("[0].hits", is(1)))
 				.andExpect(jsonPath("[0].url", is("http://www.google.com.br")));
 
-			this.mockMvc.perform(get(new URI("/users/6/stats")).contentType(this.jsonContentType)).andExpect(status().isNoContent())
+			this.mockMvc.perform(get(new URI("/users/5/stats")).contentType(this.jsonContentType)).andExpect(status().isNoContent())
 				.andExpect(content().contentType(this.textPlainContentType))
 				.andExpect(content().string("User Id doesn't exist or has no URL associated to"));
 		} catch (URISyntaxException e) {
