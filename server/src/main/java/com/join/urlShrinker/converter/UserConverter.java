@@ -25,4 +25,13 @@ public class UserConverter {
 		return result;
 	}
 
+	public User dto2entity(UserDto user) {
+		User result = new User();
+
+		result.setId(user.getId());
+		result.setUserName(user.getUserName());
+
+		return result;
+	}
+
 }

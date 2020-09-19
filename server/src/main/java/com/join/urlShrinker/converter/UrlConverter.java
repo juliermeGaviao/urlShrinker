@@ -18,4 +18,14 @@ public class UrlConverter {
 		return result;
 	}
 
+	public Url dto2Entity(UrlDto url) {
+		Url result = new Url();
+
+		result.setId(url.getId());
+		result.setUrl(url.getUrl());
+		result.setShortUrl(url.getShortUrl());
+
+		return result;
+	}
+
 }
